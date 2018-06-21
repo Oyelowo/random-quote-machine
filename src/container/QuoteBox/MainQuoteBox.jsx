@@ -12,7 +12,7 @@ class MainQuoteBox extends Component {
     error: ''
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     try {
       const res = await axios.get('https://talaikis.com/api/quotes/');
       // const response = await res.json();
@@ -55,8 +55,9 @@ class MainQuoteBox extends Component {
     // (<QuoteText       key={data.author + data.cat}       author={data.author}
     // quote={data.quote}/>)   })
 
-    // setTimeout(this.nextQuoteHandler, 5000);
-
+    if(this.state.loaded){
+      setTimeout(this.nextQuoteHandler, 2000);
+    }
     let quote = <Spinner/>;
     if (this.state.loaded) {
       quote = (<QuoteText
