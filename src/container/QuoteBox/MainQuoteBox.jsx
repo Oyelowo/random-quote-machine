@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 import QuoteText from '../../component/quoteText/quoteText';
-import Spinner from '../../component/UI/spinner/spinner';
-import Button from '../../component/UI/Button/Button';
+import Spinner from '../../component/UI/spinner/Spinner';
+// import Button from '../../component/UI/Button/Button';
 
 class MainQuoteBox extends Component {
   state = {
@@ -12,7 +12,7 @@ class MainQuoteBox extends Component {
     error: ''
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const res = await axios.get('https://talaikis.com/api/quotes/');
       // const response = await res.json();
@@ -56,7 +56,7 @@ class MainQuoteBox extends Component {
     // quote={data.quote}/>)   })
 
     if(this.state.loaded){
-      setTimeout(this.nextQuoteHandler, 2000);
+      // setTimeout(this.nextQuoteHandler, 5000);
     }
     let quote = <Spinner/>;
     if (this.state.loaded) {

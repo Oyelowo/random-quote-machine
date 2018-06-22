@@ -7,3 +7,11 @@
     box-sizing: border-box;
     box-shadow: 5px 10px #888888;
 }
+
+
+.QuoteContainer {
+    height: 80%;
+    width:  100%;
+    border: 1px double gray;
+    box-sizing: border-box;
+}

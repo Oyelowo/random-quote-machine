@@ -5,8 +5,10 @@ import Button from '../UI/Button/Button';
 const quoteText = (props) => {
     return (
         <div className={styles.quoteText}>
-            <p>{props.quote}</p>
-            <div>{props.author}</div>
+            <article className={styles.QuoteContainer}>
+                <p>{props.quote}</p>
+                <div>{props.author}</div>
+            </article>
             <Button clicked={props.nextBtn}>NEXT</Button>
             <Button clicked={props.prevBtn}>PREVIOUS</Button>
         </div>
