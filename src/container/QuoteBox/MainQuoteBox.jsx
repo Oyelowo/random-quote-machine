@@ -9,7 +9,8 @@ class MainQuoteBox extends Component {
     quoteData: [],
     loaded: false,
     count: 0,
-    error: ''
+    error: '',
+    randomNumArr: []
   }
 
   async componentDidMount() {
@@ -45,8 +46,8 @@ class MainQuoteBox extends Component {
   }
 
   previousQuoteHandler = () => {
-
-    this.setState(prevState=>({quote: prevState.quote, author: prevState.author}))
+    console.log(this.state.randomNumArr)
+    // return this.state.quoteData[this.state.count].quote;
   }
 
   render() {
