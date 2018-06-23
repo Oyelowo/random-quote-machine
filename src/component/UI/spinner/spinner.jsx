@@ -3,7 +3,7 @@ import styles from './Spinner.css';
 
 const spinner = () => {
     return (
-        <div className={styles.Loading}>Loading...</div>
+        <div className={styles.Loader}>Loading...</div>
     ); 
 }
 

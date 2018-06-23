@@ -24,30 +24,29 @@ class MainQuoteBox extends Component {
     }
   }
 
+  randomNumbersBtwInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   nextQuoteHandler = () => {
     const updatedQuotes = {
       ...this.state
     }
 
     const quoteArray = [...updatedQuotes.quoteData]
-    const next = this.state.count < quoteArray.length - 1
-      ? this.state.count + 1
-      : 0;
-    const quote = quoteArray[next].quote
-    const author = quoteArray[next].author
-    this.setState({quote: quote, author: author, count: next})
+
+    // random number between index 0 and the last index
+    const lastIndex = quoteArray.length - 1;
+    const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
+
+    const newQuote = quoteArray[this.state.count].quote
+    const author = quoteArray[this.state.count].author
+    this.setState({quote: newQuote, author: author, count: myRandomNum})
   }
 
   previousQuoteHandler = () => {
-    const updatedQuotes = {
-      ...this.state
-    }
 
-    const quoteArray = [...updatedQuotes.quoteData]
-    const previous = this.state.count > 0
-      ? this.state.count - 1
-      : quoteArray.length - 1
-    this.setState({count: previous})
+    this.setState(prevState=>({quote: prevState.quote, author: prevState.author}))
   }
 
   render() {
@@ -55,8 +54,8 @@ class MainQuoteBox extends Component {
     // (<QuoteText       key={data.author + data.cat}       author={data.author}
     // quote={data.quote}/>)   })
 
-    if(this.state.loaded){
-      // setTimeout(this.nextQuoteHandler, 5000);
+    if (this.state.loaded) {
+      setTimeout(this.nextQuoteHandler, 15000);
     }
     let quote = <Spinner/>;
     if (this.state.loaded) {
