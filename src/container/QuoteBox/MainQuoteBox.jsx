@@ -10,12 +10,13 @@ class MainQuoteBox extends Component {
     loaded: false,
     count: 0,
     error: '',
-    randomNumArr: []
+    randomNumArr: [],
+    url: 'twitter.com/intent/tweet'
   }
 
   async componentDidMount() {
     try {
-      const res = await axios.get('https://talaikis.com/api/quotes/random/');
+      const res = await axios.get('https://talaikis.com/api/quotes/');
       // const response = await res.json();
       this.setState({quoteData: res.data, loaded: true})
       console.log(this.state.quoteData)
@@ -29,30 +30,25 @@ class MainQuoteBox extends Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  newQuoteHandler = async () => {
-    // const updatedQuotes = {
-    //   ...this.state
-    // }
-
-    // const quoteArray = [...updatedQuotes.quoteData]
-
-    // // random number between index 0 and the last index
-    // const lastIndex = quoteArray.length - 1;
-    // const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
-
-    // const newQuote = quoteArray[this.state.count].quote;
-    // const author = quoteArray[this.state.count].author;
-       // this.setState({quote: newQuote, author: author, count: myRandomNum});
-    try {
-      const res = await axios.get('https://talaikis.com/api/quotes/random/');
-      // const response = await res.json();
-      this.setState({quoteData: res.data, loaded: true})
-      console.log(this.state.quoteData)
-    } catch (error) {
-      console.log(error);
-      this.setState({error: error})
+  newQuoteHandler = () => {
+    const updatedQuotes = {
+      ...this.state
     }
- 
+
+    const quoteArray = [...updatedQuotes.quoteData]
+
+    // random number between index 0 and the last index
+    const lastIndex = quoteArray.length - 1;
+    const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
+
+    const newQuote = quoteArray[this.state.count].quote;
+    const author = quoteArray[this.state.count].author;
+    this.setState({quote: newQuote, author: author, count: myRandomNum});
+  }
+
+  twitterShareHandler = (url, text) => {
+    window.open('http://twitter.com/share?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable' +
+        '=0');
   }
 
   render() {
@@ -66,9 +62,10 @@ class MainQuoteBox extends Component {
     let quote = <Spinner/>;
     if (this.state.loaded) {
       quote = (<QuoteText
-        author={this.state.quoteData.author}
-        quote={this.state.quoteData.quote}
-        newQuoteBtn={this.newQuoteHandler}/>)
+        author={this.state.quoteData[this.state.count].author}
+        quote={this.state.quoteData[this.state.count].quote}
+        newQuoteBtn={this.newQuoteHandler}
+        tweetQuote={()=>this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.count].quote)}/>)
     }
 
     return (
