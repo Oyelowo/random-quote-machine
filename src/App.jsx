@@ -6,7 +6,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div id="quote-box">
         <MainQuoteBox />
       </div>
     );

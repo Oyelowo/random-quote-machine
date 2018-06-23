@@ -15,7 +15,7 @@ class MainQuoteBox extends Component {
 
   async componentDidMount() {
     try {
-      const res = await axios.get('https://talaikis.com/api/quotes/');
+      const res = await axios.get('https://talaikis.com/api/quotes/random/');
       // const response = await res.json();
       this.setState({quoteData: res.data, loaded: true})
       console.log(this.state.quoteData)
@@ -29,20 +29,30 @@ class MainQuoteBox extends Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  newQuoteHandler = () => {
-    const updatedQuotes = {
-      ...this.state
+  newQuoteHandler = async () => {
+    // const updatedQuotes = {
+    //   ...this.state
+    // }
+
+    // const quoteArray = [...updatedQuotes.quoteData]
+
+    // // random number between index 0 and the last index
+    // const lastIndex = quoteArray.length - 1;
+    // const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
+
+    // const newQuote = quoteArray[this.state.count].quote;
+    // const author = quoteArray[this.state.count].author;
+       // this.setState({quote: newQuote, author: author, count: myRandomNum});
+    try {
+      const res = await axios.get('https://talaikis.com/api/quotes/random/');
+      // const response = await res.json();
+      this.setState({quoteData: res.data, loaded: true})
+      console.log(this.state.quoteData)
+    } catch (error) {
+      console.log(error);
+      this.setState({error: error})
     }
-
-    const quoteArray = [...updatedQuotes.quoteData]
-
-    // random number between index 0 and the last index
-    const lastIndex = quoteArray.length - 1;
-    const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
-
-    const newQuote = quoteArray[this.state.count].quote;
-    const author = quoteArray[this.state.count].author;
-    this.setState({quote: newQuote, author: author, count: myRandomNum});
+ 
   }
 
   render() {
@@ -51,13 +61,13 @@ class MainQuoteBox extends Component {
     // quote={data.quote}/>)   })
 
     if (this.state.loaded) {
-      setTimeout(this.nextQuoteHandler, 15000);
+      setTimeout(this.newQuoteHandler, 15000);
     }
     let quote = <Spinner/>;
     if (this.state.loaded) {
       quote = (<QuoteText
-        author={this.state.quoteData[this.state.count].author}
-        quote={this.state.quoteData[this.state.count].quote}
+        author={this.state.quoteData.author}
+        quote={this.state.quoteData.quote}
         newQuoteBtn={this.newQuoteHandler}/>)
     }
 

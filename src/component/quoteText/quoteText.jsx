@@ -4,12 +4,13 @@ import Button from '../UI/Button/Button';
 
 const quoteText = (props) => {
     return (
-        <div className={styles.quoteText}>
+        <div id="text" className={styles.quoteText}>
             <article className={styles.QuoteContainer}>
                 <p>{props.quote}</p>
-                <div>{props.author}</div>
+                <div id="author">{props.author}</div>
             </article>
-            <Button clicked={props.newQuoteBtn}>NEW QUOTE</Button>
+            <Button id="new-quote" clicked={props.newQuoteBtn}>NEW QUOTE</Button>
+            <Button id="tweet-quote"></Button>
         </div>
     )
 }
