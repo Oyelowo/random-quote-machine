@@ -29,7 +29,7 @@ class MainQuoteBox extends Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  nextQuoteHandler = () => {
+  newQuoteHandler = () => {
     const updatedQuotes = {
       ...this.state
     }
@@ -40,14 +40,9 @@ class MainQuoteBox extends Component {
     const lastIndex = quoteArray.length - 1;
     const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
 
-    const newQuote = quoteArray[this.state.count].quote
-    const author = quoteArray[this.state.count].author
-    this.setState({quote: newQuote, author: author, count: myRandomNum})
-  }
-
-  previousQuoteHandler = () => {
-    console.log(this.state.randomNumArr)
-    // return this.state.quoteData[this.state.count].quote;
+    const newQuote = quoteArray[this.state.count].quote;
+    const author = quoteArray[this.state.count].author;
+    this.setState({quote: newQuote, author: author, count: myRandomNum});
   }
 
   render() {
@@ -63,8 +58,7 @@ class MainQuoteBox extends Component {
       quote = (<QuoteText
         author={this.state.quoteData[this.state.count].author}
         quote={this.state.quoteData[this.state.count].quote}
-        nextBtn={this.nextQuoteHandler}
-        prevBtn={this.previousQuoteHandler}/>)
+        newQuoteBtn={this.newQuoteHandler}/>)
     }
 
     return (

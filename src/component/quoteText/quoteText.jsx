@@ -9,8 +9,7 @@ const quoteText = (props) => {
                 <p>{props.quote}</p>
                 <div>{props.author}</div>
             </article>
-            <Button clicked={props.nextBtn}>NEXT</Button>
-            <Button clicked={props.prevBtn}>PREVIOUS</Button>
+            <Button clicked={props.newQuoteBtn}>NEW QUOTE</Button>
         </div>
     )
 }
