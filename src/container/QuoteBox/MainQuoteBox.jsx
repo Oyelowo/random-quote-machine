@@ -46,11 +46,24 @@ class MainQuoteBox extends Component {
     this.setState({quote: newQuote, author: author, count: myRandomNum});
   }
 
+  
+
   twitterShareHandler = (url, text) => {
     window.open('http://twitter.com/share?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable' +
         '=0');
   }
 
+
+
+  getRandomColor=()=> {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
   render() {
     // let quote = this   .state   .quoteData   .map(data => {     return
     // (<QuoteText       key={data.author + data.cat}       author={data.author}
@@ -65,11 +78,12 @@ class MainQuoteBox extends Component {
         author={this.state.quoteData[this.state.count].author}
         quote={this.state.quoteData[this.state.count].quote}
         newQuoteBtn={this.newQuoteHandler}
-        tweetQuote={()=>this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.count].quote)}/>)
+        tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.count].quote + '\n' + this.state.quoteData[this.state.count].author)}/>)
     }
 
+
     return (
-      <div>
+      <div style={{backgroundColor: this.getRandomColor()}}>
         <h1>MY RANDOM QUOTE MACHINE</h1>
         {quote}
 
