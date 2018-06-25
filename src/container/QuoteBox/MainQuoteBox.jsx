@@ -24,6 +24,12 @@ class MainQuoteBox extends Component {
       console.log(error);
       this.setState({error: error})
     }
+    setInterval(this.newQuoteHandler, 5000);
+    
+  }
+  
+  componentWillMount(){
+    clearInterval(this.newQuoteHandler)
   }
 
   randomNumbersBtwInterval = (min, max) => {
@@ -46,16 +52,12 @@ class MainQuoteBox extends Component {
     this.setState({quote: newQuote, author: author, count: myRandomNum});
   }
 
-  
-
   twitterShareHandler = (url, text) => {
     window.open('http://twitter.com/share?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable' +
         '=0');
   }
 
-
-
-  getRandomColor=()=> {
+  getRandomColor = () => {
     let letters = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {
@@ -63,15 +65,13 @@ class MainQuoteBox extends Component {
     }
     return color;
   }
-  
+
   render() {
     // let quote = this   .state   .quoteData   .map(data => {     return
     // (<QuoteText       key={data.author + data.cat}       author={data.author}
     // quote={data.quote}/>)   })
 
-    if (this.state.loaded) {
-      setTimeout(this.newQuoteHandler, 15000);
-    }
+
     let quote = <Spinner/>;
     if (this.state.loaded) {
       quote = (<QuoteText
@@ -81,9 +81,8 @@ class MainQuoteBox extends Component {
         tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.count].quote + '\n' + this.state.quoteData[this.state.count].author)}/>)
     }
 
-
     return (
-      <div style={{backgroundColor: this.getRandomColor()}}>
+      <div>
         <h1>MY RANDOM QUOTE MACHINE</h1>
         {quote}
 
