@@ -25,10 +25,10 @@ class MainQuoteBox extends Component {
       this.setState({error: error})
     }
     setInterval(this.newQuoteHandler, 5000);
-    
+
   }
-  
-  componentWillMount(){
+
+  componentWillMount() {
     clearInterval(this.newQuoteHandler)
   }
 
@@ -37,11 +37,7 @@ class MainQuoteBox extends Component {
   }
 
   newQuoteHandler = () => {
-    const updatedQuotes = {
-      ...this.state
-    }
-
-    const quoteArray = [...updatedQuotes.quoteData]
+    const {quoteData: quoteArray} = this.state;
 
     // random number between index 0 and the last index
     const lastIndex = quoteArray.length - 1;
@@ -70,7 +66,6 @@ class MainQuoteBox extends Component {
     // let quote = this   .state   .quoteData   .map(data => {     return
     // (<QuoteText       key={data.author + data.cat}       author={data.author}
     // quote={data.quote}/>)   })
-
 
     let quote = <Spinner/>;
     if (this.state.loaded) {
