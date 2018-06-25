@@ -8,7 +8,7 @@ class MainQuoteBox extends Component {
   state = {
     quoteData: [],
     loaded: false,
-    count: 0,
+    randomNum: 0,
     error: '',
     randomNumArr: [],
     url: 'twitter.com/intent/tweet'
@@ -24,7 +24,11 @@ class MainQuoteBox extends Component {
       console.log(error);
       this.setState({error: error})
     }
-    setInterval(this.newQuoteHandler, 5000);
+
+    const {quoteData} = this.state;
+    const {quote} = quoteData[this.state.randomNum];
+    const quoteTime = this.getQuoteTime(quote, 1300);
+    setInterval(this.newQuoteHandler, quoteTime);
 
   }
 
@@ -32,6 +36,13 @@ class MainQuoteBox extends Component {
     clearInterval(this.newQuoteHandler)
   }
 
+  getQuoteTime = (quote, eachWordTimeMillisec) => {
+    let wordCount = quote
+      .split(' ')
+      .length;
+    let quoteTime = wordCount * eachWordTimeMillisec;
+    return quoteTime;
+  }
   randomNumbersBtwInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -43,9 +54,9 @@ class MainQuoteBox extends Component {
     const lastIndex = quoteArray.length - 1;
     const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
 
-    const newQuote = quoteArray[this.state.count].quote;
-    const author = quoteArray[this.state.count].author;
-    this.setState({quote: newQuote, author: author, count: myRandomNum});
+    const newQuote = quoteArray[myRandomNum].quote;
+    const author = quoteArray[myRandomNum].author;
+    this.setState({quote: newQuote, author: author, randomNum: myRandomNum});
   }
 
   twitterShareHandler = (url, text) => {
@@ -70,10 +81,10 @@ class MainQuoteBox extends Component {
     let quote = <Spinner/>;
     if (this.state.loaded) {
       quote = (<QuoteText
-        author={this.state.quoteData[this.state.count].author}
-        quote={this.state.quoteData[this.state.count].quote}
+        author={this.state.quoteData[this.state.randomNum].author}
+        quote={this.state.quoteData[this.state.randomNum].quote}
         newQuoteBtn={this.newQuoteHandler}
-        tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.count].quote + '\n' + this.state.quoteData[this.state.count].author)}/>)
+        tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/>)
     }
 
     return (
