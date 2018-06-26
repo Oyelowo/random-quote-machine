@@ -16,7 +16,7 @@ class MainQuoteBox extends Component {
     errorEncountered: false,
     url: 'twitter.com/intent/tweet',
     quoteTime: 1000,
-    time: 10,
+    time: 10000,
     imagesArray: [],
     imgRandomNum: 0,
     dynamicColor: '#000'
@@ -42,9 +42,11 @@ class MainQuoteBox extends Component {
         return acc.concat(val.largeImageURL)
       }, []);
 
+      // let myTime = this.getQuoteTimqe(uote, 2000); console.log(this.state.time)
       this.setState({quoteData: quoteResponse.data, quote: quote, author: author, imagesArray: imagesArray, loaded: true});
 
-      setInterval(this.newQuoteHandler, 10000);
+      setInterval(this.newQuoteHandler, this.state.time);
+
     } catch (error) {
       this.setState({error: error.message, errorEncountered: true});
     }
@@ -60,7 +62,7 @@ class MainQuoteBox extends Component {
       .split(' ')
       .length;
     let quoteTime = wordCount * eachWordTimeMillisec;
-    return quoteTime;
+    this.setState({time: quoteTime});
   }
 
   randomNumbersBtwInterval = (min, max) => {
@@ -77,9 +79,7 @@ class MainQuoteBox extends Component {
 
     const {quote, author} = quoteArray[myRandomNum];
 
-    quoteTime = this.getQuoteTime(quote, 20000);
-
-    this.setState({quote: quote, quoteTime: quoteTime, author: author, randomNum: myRandomNum, imgRandomNum: imgRandomNum});
+    this.setState({quote: quote, author: author, randomNum: myRandomNum, imgRandomNum: imgRandomNum});
     this.getRandomColor()
   }
 
@@ -98,10 +98,6 @@ class MainQuoteBox extends Component {
   }
 
   render() {
-    // let quote = this   .state   .quoteData   .map(data => {     return
-    // (<QuoteText       key={data.author + data.cat}       author={data.author}
-    // quote={data.quote}/>)   })
-
     let quote = <Spinner/>;
     let error = this.state.errorEncountered
       ? <div
@@ -141,9 +137,12 @@ class MainQuoteBox extends Component {
             backgroundColor: 'white',
             border: `1px solid ${this.state.dynamicColor}`,
             borderRadius: '5px'
-
-          }}>coded By:  
-            <a href="https://www.linkedin.com/in/oyelowo-oyedayo/" rel="noopener noreferrer" target='_blank'> Oyelowo Oyedayo</a>
+          }}>coded By:
+            <a
+              href="https://www.linkedin.com/in/oyelowo-oyedayo/"
+              rel="noopener noreferrer"
+              target='_blank'>
+              Oyelowo Oyedayo</a>
           </Button>
         </div>
 
