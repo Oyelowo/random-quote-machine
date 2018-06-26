@@ -3,10 +3,6 @@ import axios from 'axios';
 import QuoteText from '../../component/quoteText/quoteText';
 import Spinner from '../../component/UI/spinner/Spinner';
 import styles from './MainQuoteBox.css';
-// import Background1 from '../../assets/natureImages/img1.jpg'; import
-// Background2 from '../../assets/natureImages/img2.jpg'; import Background3
-// from '../../assets/natureImages/img3.jpg' import Button from
-// '../../component/UI/Button/Button';
 
 class MainQuoteBox extends Component {
   state = {
@@ -21,15 +17,16 @@ class MainQuoteBox extends Component {
     quoteTime: 1000,
     time: 10,
     imagesArray: [],
-    imgRandomNum: 0
+    imgRandomNum: 0,
+    dynamicColor: '#000'
   }
   async componentDidMount() {
     try {
       const [quoteResponse,
         imagesResponse] = await Promise.all([
         axios.get('https://talaikis.com/api/quotes/'),
-        axios.get('https://pixabay.com/api/?key=9392509-1ebd5d1cb57ec9a0bc4ec3aa0&q=yellow+flowers&' +
-            'image_type=photo')
+        axios.get('https://pixabay.com/api/?key=9392509-1ebd5d1cb57ec9a0bc4ec3aa0&q=nature&image_ty' +
+            'pe=photo')
       ]);
       // console.log(imagesResponse.data.hits)
 
@@ -39,14 +36,14 @@ class MainQuoteBox extends Component {
       const lastIndex = quoteArray.length - 1;
       const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
 
-      const {quote, author} = quoteArray[myRandomNum]; 
+      const {quote, author} = quoteArray[myRandomNum];
       let imagesArray = [...imagesResponse.data.hits];
-      imagesArray = imagesArray.reduce((acc, val)=>{
-       return acc.concat(val.largeImageURL)
-       } , [])
+      imagesArray = imagesArray.reduce((acc, val) => {
+        return acc.concat(val.largeImageURL)
+      }, [])
       console.log(imagesArray)
-      this.setState({quoteData: quoteResponse.data,  quote: quote, author: author, imagesArray: imagesArray, loaded: true});
-      console.log(this.state.imagesArray )
+      this.setState({quoteData: quoteResponse.data, quote: quote, author: author, imagesArray: imagesArray, loaded: true});
+      console.log(this.state.imagesArray)
 
       setInterval(this.newQuoteHandler, 10000);
     } catch (error) {
@@ -71,24 +68,21 @@ class MainQuoteBox extends Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-
-  newQuoteHandler = (quoteTime, fxn) => {
+  newQuoteHandler = (quoteTime) => {
     const {quoteData: quoteArray} = this.state;
 
     // random number between index 0 and the last index
     const lastIndex = quoteArray.length - 1;
     const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
-    let imgRandomNum = this.randomNumbersBtwInterval(0, this.state.imagesArray.length-1);
+    let imgRandomNum = this.randomNumbersBtwInterval(0, this.state.imagesArray.length - 1);
 
     const {quote, author} = quoteArray[myRandomNum];
 
     quoteTime = this.getQuoteTime(quote, 20000);
-    console.log(quoteTime);
 
     this.setState({quote: quote, quoteTime: quoteTime, author: author, randomNum: myRandomNum, imgRandomNum: imgRandomNum});
-   
+    this.getRandomColor()
   }
- 
 
   twitterShareHandler = (url, text) => {
     window.open('http://twitter.com/share?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable' +
@@ -96,12 +90,12 @@ class MainQuoteBox extends Component {
   }
 
   getRandomColor = () => {
-    let letters = '0123456789ABCDEF';
+    let letters = '0123456789A';
     let color = '#';
     for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+      color += letters[Math.floor(Math.random() * 11)];
     }
-    return color;
+    this.setState({dynamicColor: color});
   }
 
   render() {
@@ -110,17 +104,6 @@ class MainQuoteBox extends Component {
     // quote={data.quote}/>)   })
 
     let quote = <Spinner/>;
-    if (this.state.loaded) {
-      quote = (<QuoteText
-        // author={this.state.quoteData[this.state.randomNum].author}
-        // quote={this.state.quoteData[this.state.randomNum].quote}
-        author= {this.state.author}
-        quote={this.state.quote} 
-        newQuoteBtn={this.newQuoteHandler}
-        tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/>)
-    }
-    
-
     let error = this.state.errorEncountered
       ? <div
           style={{
@@ -129,24 +112,34 @@ class MainQuoteBox extends Component {
         }}>{this.state.error}. Woops! something went wrong. Please try again!</div>
       : null;
 
-    return (
-      <div  className={styles.FullScreen} style={{
-        backgroundImage: `url(${this.state.imagesArray[this.state.imgRandomNum]})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 100%'
-      } }>
-        
-        <h1
+    if (this.state.loaded) {
+      quote = (
+        <div
+          className={styles.FullScreen}
           style={{
-          background:'white', 
-          display: 'inline-block',
-          padding: '20px'
-        }}>MY RANDOM QUOTE MACHINE</h1>
-        
-        {quote}
-        {error}
-      </div>
-    )
+          backgroundImage: `url(${this.state.imagesArray[this.state.imgRandomNum]})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          color: this.state.dynamicColor
+        }}>
+
+          <h1
+            style={{
+            background: 'white',
+            display: 'inline-block',
+            padding: '20px'
+          }}>MY RANDOM QUOTE MACHINE</h1>
+          <QuoteText
+            author={this.state.author}
+            quote={this.state.quote}
+            textColor={this.state.dynamicColor}
+            newQuoteBtn={this.newQuoteHandler}
+            tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/>; {error}
+        </div>
+
+      )
+    }
+    return quote;
   }
 }
 
