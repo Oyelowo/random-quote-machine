@@ -10,6 +10,7 @@ class MainQuoteBox extends Component {
     quoteData: [],
     quote: '',
     author: '',
+    category: '',
     loaded: false,
     randomNum: 0,
     error: '',
@@ -36,14 +37,21 @@ class MainQuoteBox extends Component {
       const lastIndex = quoteArray.length - 1;
       const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
 
-      const {quote, author} = quoteArray[myRandomNum];
+      const {quote, author, cat} = quoteArray[myRandomNum];
       let imagesArray = [...imagesResponse.data.hits];
       imagesArray = imagesArray.reduce((acc, val) => {
         return acc.concat(val.largeImageURL)
       }, []);
 
       // let myTime = this.getQuoteTimqe(uote, 2000); console.log(this.state.time)
-      this.setState({quoteData: quoteResponse.data, quote: quote, author: author, imagesArray: imagesArray, loaded: true});
+      this.setState({
+        quoteData: quoteResponse.data,
+        category: cat,
+        quote: quote,
+        author: author,
+        imagesArray: imagesArray,
+        loaded: true
+      });
 
       setInterval(this.newQuoteHandler, this.state.time);
 
@@ -69,7 +77,7 @@ class MainQuoteBox extends Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  newQuoteHandler = (quoteTime) => {
+  newQuoteHandler = () => {
     const {quoteData: quoteArray} = this.state;
 
     // random number between index 0 and the last index
@@ -77,9 +85,9 @@ class MainQuoteBox extends Component {
     const myRandomNum = this.randomNumbersBtwInterval(0, lastIndex);
     let imgRandomNum = this.randomNumbersBtwInterval(0, this.state.imagesArray.length - 1);
 
-    const {quote, author} = quoteArray[myRandomNum];
+    const {quote, author, cat: category} = quoteArray[myRandomNum];
 
-    this.setState({quote: quote, author: author, randomNum: myRandomNum, imgRandomNum: imgRandomNum});
+    this.setState({quote: quote, author: author, category: category, randomNum: myRandomNum, imgRandomNum: imgRandomNum});
     this.getRandomColor()
   }
 
@@ -118,13 +126,9 @@ class MainQuoteBox extends Component {
           color: this.state.dynamicColor
         }}>
 
-          <h1
-            style={{
-            background: 'white',
-            display: 'inline-block',
-            padding: '20px'
-          }}>MY RANDOM QUOTE MACHINE</h1>
+          <h1>MY RANDOM QUOTE MACHINE</h1>
           <QuoteText
+            category={this.state.category}
             author={this.state.author}
             quote={this.state.quote}
             textColor={this.state.dynamicColor}

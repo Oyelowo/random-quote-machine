@@ -8,6 +8,14 @@
     box-shadow: 5px 10px #888888;
     font-size: 1.4rem;
     z-index: 1000;
+    background: white;
+    opacity: 0.9;
+}
+
+h2 {
+    /* font-variant: small-caps; */
+    text-transform: uppercase;
+    font-size: 1.7rem;
 }
 
 .quoteText p:first {
@@ -15,12 +23,13 @@
     position: relative;
 }
 
-.quoteText p:nth-child(2) {
+.quoteText p:nth-of-type(2) {
     text-align: end;
     margin-right: 20px;
 }
 
-.TextFadeIn {
+.TextFadeIn,
+h2 {
     animation-name: example;
     animation-duration: 10s;
     animation-iteration-count: infinite;
@@ -31,9 +40,11 @@
 @keyframes example {
     0% {
         opacity: 0;
+        transform: translateY(10px)
     }
     20% {
         opacity: 1;
+        transform: translate(0);
     }
 }
 
@@ -57,11 +68,14 @@ a {
     border-radius: 10%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 760px) {
     .quoteText {
         font-size: 1.2rem;
         height: 55vh;
         width: 90%;
         margin-top: 70px;
+    }
+    p {
+        margin-top: 5px;
     }
 }
