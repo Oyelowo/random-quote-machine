@@ -9,3 +9,8 @@
     margin: 10px;
     font-weight: bold;
 }
+
+.Button:hover{
+    opacity: 0.8;
+}
+

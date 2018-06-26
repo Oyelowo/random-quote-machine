@@ -1,13 +1,25 @@
 .quoteText {
-    height: 20rem;
+    height: 20rem; 
     width: 80%;
     margin: 15vh auto;
     padding: 15px;
-    border: 1px dotted coral;
+    border-radius: 10px; 
     box-sizing: border-box;
-    box-shadow: 5px 10px #888888;
+    /* box-shadow: 5px 10px #888888; */
     font-size: 2rem;
     /* background-color: r; */
+}
+
+.quoteText p:first{
+    text-align: center;
+    position: relative;
+
+}
+
+.quoteText p:nth-child(2){
+    text-align: end;
+    margin-right: 20px;
+    
 }
 
 .TextFadeIn {
@@ -30,4 +42,18 @@
     width: 100%;
     border: 1px double gray;
     box-sizing: border-box;
+    border-radius: 15px;
+    padding: 10px;
 }
+
+a{
+    text-decoration: none;
+}
+
+.tweetQuote{
+ color: #00aced;
+ border: #00aced 1px solid;
+ padding: 10px;
+ border-radius: 10%;
+}
+

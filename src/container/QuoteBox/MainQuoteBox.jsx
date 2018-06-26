@@ -10,7 +10,6 @@ class MainQuoteBox extends Component {
     loaded: false,
     randomNum: 0,
     error: '',
-    randomNumArr: [],
     url: 'twitter.com/intent/tweet',
     quoteTime: null,
     time: 10
@@ -88,8 +87,8 @@ class MainQuoteBox extends Component {
     }
 
     return (
-      <div>
-        <h1>MY RANDOM QUOTE MACHINE</h1>
+      <div >
+        <h1 style={{background: 'white', display: 'inline-block', padding: '20px'}}>MY RANDOM QUOTE MACHINE</h1>
         {quote}
         <p>{this.state.quoteTime}</p>
 

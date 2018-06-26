@@ -4,13 +4,14 @@ import Button from '../UI/Button/Button';
 
 const quoteText = (props) => {
     return (
-        <div id="text" className={styles.quoteText}>
+        <div id="text" className={styles.quoteText} style={{background: 'white', opacity: '0.9'}}>
             <article className={styles.QuoteContainer}>
-                <p className={styles.TextFadeIn}>{props.quote}</p>
-                <div className={styles.TextFadeIn} id="author">{props.author}</div>
+                <p className={styles.TextFadeIn}>"{props.quote}"</p>
+                
+                <p className={styles.TextFadeIn} id="author">-{props.author}</p>
             </article>
             <Button id="new-quote" onClick={props.newQuoteBtn}>NEW QUOTE</Button>
-            <a id="tweet-quote" href='twitter.com/intent/tweet' onClick={props.tweetQuote}>TweetQuote</a>
+            <Button><a id="tweet-quote" href='twitter.com/intent/tweet' className={styles.tweetQuote} onClick={props.tweetQuote}><i class="fab fa-twitter"></i> Tweet Quote</a></Button>
         </div>
     )
 }
