@@ -2,20 +2,16 @@ import React, {Component} from 'react';
 // import './App.css';
 import MainQuoteBox from './container/QuoteBox/MainQuoteBox'
 import styles from './App.css';
-import Background from './assets/natureImages/pexels-photo-257360.jpg';
+import Background from './assets/natureImages/img1.jpg'
 
 class App extends Component {
 
+  // componentDidMount(){   setInterval(()=> , 2000) }
+
   render() {
+
     return (
-      <div
-        id="quote-box"
-        style={{
-        backgroundImage: `url(${Background})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 100%'
-      }}
-        className={styles.App}>
+      <div id="quote-box">
         <MainQuoteBox/>
       </div>
     );
