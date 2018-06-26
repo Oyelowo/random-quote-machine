@@ -11,7 +11,7 @@ const quoteText = (props) => {
                 <p className={styles.TextFadeIn} id="author">-{props.author}</p>
             </article>
             <Button id="new-quote" onClick={props.newQuoteBtn}>NEW QUOTE</Button>
-            <Button><a id="tweet-quote" href='twitter.com/intent/tweet' className={styles.tweetQuote} onClick={props.tweetQuote}><i class="fab fa-twitter"></i> Tweet Quote</a></Button>
+            <Button><a id="tweet-quote" href='twitter.com/intent/tweet' className={styles.tweetQuote} onClick={props.tweetQuote}><i className="fab fa-twitter"></i> Tweet Quote</a></Button>
         </div>
     )
 }
