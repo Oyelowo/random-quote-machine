@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import QuoteText from '../../component/quoteText/quoteText';
 import Spinner from '../../component/UI/spinner/Spinner';
-import { stat } from 'fs';
+import styles from './MainQuoteBox.css';
 // import Background1 from '../../assets/natureImages/img1.jpg'; import
 // Background2 from '../../assets/natureImages/img2.jpg'; import Background3
 // from '../../assets/natureImages/img3.jpg' import Button from
@@ -120,8 +120,6 @@ class MainQuoteBox extends Component {
         tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/>)
     }
     
-    let image = this.state.loaded ?  <img src ={this.state.imagesArray[this.state.imgRandomNum]} alt="" srcset=""/> : null
-
 
     let error = this.state.errorEncountered
       ? <div
@@ -132,12 +130,12 @@ class MainQuoteBox extends Component {
       : null;
 
     return (
-      <div  style={{
+      <div  className={styles.FullScreen} style={{
         backgroundImage: `url(${this.state.imagesArray[this.state.imgRandomNum]})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover 100%'
+        backgroundSize: '100% 100%'
       } }>
-        {/* {image} */}
+        
         <h1
           style={{
           background:'white', 
@@ -146,7 +144,6 @@ class MainQuoteBox extends Component {
         }}>MY RANDOM QUOTE MACHINE</h1>
         
         {quote}
-        <p>{this.state.quoteTime}</p>
         {error}
       </div>
     )
