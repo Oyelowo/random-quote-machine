@@ -1,12 +1,12 @@
 .quoteText {
     height: 20rem; 
     width: 80%;
-    margin: 15vh auto;
+    margin: 13vh auto;
     padding: 15px;
     border-radius: 10px; 
     box-sizing: border-box;
     /* box-shadow: 5px 10px #888888; */
-    font-size: 2rem;
+    font-size: 1.4rem;
     /* background-color: r; */
 }
 
@@ -57,3 +57,13 @@ a{
  border-radius: 10%;
 }
 
+
+@media only screen and (max-width: 600px) {
+    .quoteText{
+        font-size: 1.2rem;
+        height: 65vh; 
+        width: 90%;
+        margin-top: 70px;
+        
+    }
+}
