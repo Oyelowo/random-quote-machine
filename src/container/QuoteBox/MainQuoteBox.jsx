@@ -10,6 +10,7 @@ class MainQuoteBox extends Component {
     loaded: false,
     randomNum: 0,
     error: '',
+    errorEncountered: false,
     url: 'twitter.com/intent/tweet',
     quoteTime: null,
     time: 10
@@ -18,14 +19,14 @@ class MainQuoteBox extends Component {
     try {
       const res = await axios.get('https://talaikis.com/api/quotes/');
       this.setState({quoteData: res.data, loaded: true})
+      setInterval(this.newQuoteHandler, 15000);
     } catch (error) {
-      this.setState({error: error});      
+      this.setState({error: error.message, errorEncountered: true});
     }
-    setInterval(this.newQuoteHandler, 15000);
+    
 
   }
 
-  
   componentWillUnMount() {
     clearInterval(this.newQuoteHandler)
   }
@@ -85,13 +86,23 @@ class MainQuoteBox extends Component {
         newQuoteBtn={this.newQuoteHandler}
         tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/>)
     }
+    let error = this.state.errorEncountered
+      ? <div style={{
+          backgroundColor: 'white', padding: '20px'
+        }}>{this.state.error}. Woops! something went wrong. Please try again!</div>
+      : null;
 
     return (
       <div >
-        <h1 style={{background: 'white', display: 'inline-block', padding: '20px'}}>MY RANDOM QUOTE MACHINE</h1>
+        <h1
+          style={{
+          background: 'white',
+          display: 'inline-block',
+          padding: '20px'
+        }}>MY RANDOM QUOTE MACHINE</h1>
         {quote}
         <p>{this.state.quoteTime}</p>
-
+        {error}
       </div>
     )
   }
