@@ -3,6 +3,7 @@ import axios from 'axios';
 import QuoteText from '../../component/quoteText/quoteText';
 import Spinner from '../../component/UI/spinner/Spinner';
 import styles from './MainQuoteBox.css';
+import Button from '../../component/UI/Button/Button';
 
 class MainQuoteBox extends Component {
   state = {
@@ -28,7 +29,6 @@ class MainQuoteBox extends Component {
         axios.get('https://pixabay.com/api/?key=9392509-1ebd5d1cb57ec9a0bc4ec3aa0&q=nature&image_ty' +
             'pe=photo')
       ]);
-      // console.log(imagesResponse.data.hits)
 
       const quoteArray = [...quoteResponse.data];
 
@@ -40,10 +40,9 @@ class MainQuoteBox extends Component {
       let imagesArray = [...imagesResponse.data.hits];
       imagesArray = imagesArray.reduce((acc, val) => {
         return acc.concat(val.largeImageURL)
-      }, [])
-      console.log(imagesArray)
+      }, []);
+
       this.setState({quoteData: quoteResponse.data, quote: quote, author: author, imagesArray: imagesArray, loaded: true});
-      console.log(this.state.imagesArray)
 
       setInterval(this.newQuoteHandler, 10000);
     } catch (error) {
@@ -110,7 +109,7 @@ class MainQuoteBox extends Component {
           backgroundColor: 'white',
           padding: '20px'
         }}>{this.state.error}. Woops! something went wrong. Please try again!</div>
-      : null;
+      : null
 
     if (this.state.loaded) {
       quote = (
@@ -134,7 +133,18 @@ class MainQuoteBox extends Component {
             quote={this.state.quote}
             textColor={this.state.dynamicColor}
             newQuoteBtn={this.newQuoteHandler}
-            tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/>; {error}
+            tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/> {error}
+
+          <Button
+            style={{
+            color: this.state.dynamicColor,
+            backgroundColor: 'white',
+            border: `1px solid ${this.state.dynamicColor}`,
+            borderRadius: '5px'
+
+          }}>coded By:  
+            <a href="https://www.linkedin.com/in/oyelowo-oyedayo/" rel="noopener noreferrer" target='_blank'> Oyelowo Oyedayo</a>
+          </Button>
         </div>
 
       )

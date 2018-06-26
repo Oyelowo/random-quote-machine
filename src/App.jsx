@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-// import './App.css';
-import MainQuoteBox from './container/QuoteBox/MainQuoteBox'
-import styles from './App.css';
-import Background from './assets/natureImages/img1.jpg'
+import MainQuoteBox from './container/QuoteBox/MainQuoteBox';
 
 
 class App extends Component {
