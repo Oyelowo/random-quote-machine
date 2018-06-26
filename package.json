@@ -1,8 +1,8 @@
 {
   "name": "random-quote-machine",
   "version": "0.1.0",
-  "private": true,
   "homepage": "https://oyelowo.github.io/random-quote-machine",
+  "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
