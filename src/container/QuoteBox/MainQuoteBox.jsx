@@ -99,7 +99,7 @@ class MainQuoteBox extends Component {
 
   getRandomColor = () => {
     let letters = '0123456789A';
-    let lettersCount = letters.split('').length
+    let lettersCount = letters.length
     let color = '#';
     for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * lettersCount)];
