@@ -5,6 +5,7 @@ import Spinner from '../../component/UI/spinner/Spinner';
 import styles from './MainQuoteBox.css';
 import Button from '../../component/UI/Button/Button';
 
+
 class MainQuoteBox extends Component {
   state = {
     quoteData: [],
@@ -98,22 +99,27 @@ class MainQuoteBox extends Component {
 
   getRandomColor = () => {
     let letters = '0123456789A';
+    let lettersCount = letters.split('').length
     let color = '#';
     for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 11)];
+      color += letters[Math.floor(Math.random() * lettersCount)];
     }
     this.setState({dynamicColor: color});
   }
 
   render() {
+    
     let quote = <Spinner/>;
     let error = this.state.errorEncountered
       ? <div
           style={{
-          backgroundColor: 'white',
+          background: `white`,
+          textAlign: 'center',
+          fontSize: '2rem',
           padding: '20px'
         }}>{this.state.error}. Woops! something went wrong. Please try again!</div>
       : null
+
 
     if (this.state.loaded) {
       quote = (
@@ -133,7 +139,7 @@ class MainQuoteBox extends Component {
             quote={this.state.quote}
             textColor={this.state.dynamicColor}
             newQuoteBtn={this.newQuoteHandler}
-            tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/> {error}
+            tweetQuote={() => this.twitterShareHandler(this.state.url, this.state.quoteData[this.state.randomNum].quote + '\n' + this.state.quoteData[this.state.randomNum].author)}/> 
 
           <Button
             style={{
@@ -145,14 +151,14 @@ class MainQuoteBox extends Component {
             <a
               href="https://www.linkedin.com/in/oyelowo-oyedayo/"
               rel="noopener noreferrer"
-              target='_blank'>
-              Oyelowo Oyedayo</a>
+              target='_blank'> 
+              <i className='fab fa-linkedin'></i> Oyelowo Oyedayo</a>
           </Button>
         </div>
 
       )
     }
-    return quote;
+    return <div>{quote}{error}</div>  ;
   }
 }
 

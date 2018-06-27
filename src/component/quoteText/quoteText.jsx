@@ -6,10 +6,7 @@ const quoteText = (props) => {
     return (
         <div
             id="text"
-            className={styles.quoteText}
-            style={{
-            
-        }}>
+            className={styles.quoteText}>
             <article className={styles.QuoteContainer}>
                 <h2>CATEGORY: {props.category}</h2>
                 <p className={styles.TextFadeIn}>"{props.quote}"</p>

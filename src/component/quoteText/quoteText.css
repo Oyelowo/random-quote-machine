@@ -1,4 +1,4 @@
-.quoteText {
+.QuoteText {
     height: 20rem;
     width: 80%;
     margin: 13vh auto;
@@ -10,6 +10,24 @@
     z-index: 1000;
     background: white;
     opacity: 0.9;
+    animation-name: styleIn;
+    animation-duration: 3s;
+}
+
+@keyframes styleIn{
+    0% {
+        transform: translateY(-100vh);
+        transform: rotateX(180deg);
+    }
+    80% {
+        transform: translateY(10vh);
+        transform: rotateX(90deg);
+    }
+
+    100% {
+        transform: translateY(0);
+        transform: rotateX(0);
+    }
 }
 
 h2 {
@@ -30,14 +48,14 @@ h2 {
 
 .TextFadeIn,
 h2 {
-    animation-name: example;
+    animation-name: fadeIn;
     animation-duration: 10s;
     animation-iteration-count: infinite;
     /* animation-fill-mode: forwards; */
     /* animation-play-state: running; */
 }
 
-@keyframes example {
+@keyframes fadeIn {
     0% {
         opacity: 0;
         transform: translateY(10px)
