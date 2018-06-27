@@ -10,7 +10,12 @@
     font-weight: bold;
 }
 
-.Button:hover{
+.Button:hover {
     opacity: 0.7;
 }
 
+@media(max-width: 760px) {
+    .Button{
+        padding: 1px;
+    }
+}

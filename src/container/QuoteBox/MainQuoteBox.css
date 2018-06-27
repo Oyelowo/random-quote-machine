@@ -36,3 +36,11 @@ h1 {
     bottom: 0;
     background: white;
   } */
+
+  
+@media(max-width: 760px) {
+    h1{
+        font-size: 1rem;
+        padding: 5px;
+    }
+}

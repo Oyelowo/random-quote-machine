@@ -15,10 +15,10 @@ const quoteText = (props) => {
                 id="new-quote"
                 style={{
                 color: props.textColor,
-                border: `1px solid ${props.textColor}`
-            }}
-                onClick={props.newQuoteBtn}>NEW QUOTE</Button>
-            <Button>
+                border: `1px solid ${props.textColor}` 
+            }} className={styles.Button}
+                onClick={props.newQuoteBtn}> <span>NEW QUOTE</span> </Button>
+            <Button className={styles.Button}>
                 <a
                     id="tweet-quote"
                     href='twitter.com/intent/tweet'

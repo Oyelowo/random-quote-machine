@@ -89,14 +89,25 @@ a {
     border-radius: 10%;
 }
 
-@media only screen and (max-width: 760px) {
+@media(max-width: 760px) {
     .QuoteText {
-        font-size: 1.2rem;
-        height: 55vh;
+        height: 70vh;
         width: 90%;
-        margin-top: 70px;
+        margin:5vh auto;
     }
     p {
         margin-top: 5px;
     }
+
+   h2, p,a, span{
+    font-size: 0.8rem;
+   }
+   span{
+       padding: 5px;
+   }
+
+   .tweetQuote{
+       padding: 5px;
+   }
+   
 }
