@@ -36,12 +36,12 @@ h2 {
     font-size: 1.7rem;
 }
 
-.quoteText p:first {
+.QuoteText p:first {
     text-align: center;
     position: relative;
 }
 
-.quoteText p:nth-of-type(2) {
+.QuoteText p:nth-of-type(2) {
     text-align: end;
     margin-right: 20px;
 }
@@ -87,7 +87,7 @@ a {
 }
 
 @media only screen and (max-width: 760px) {
-    .quoteText {
+    .QuoteText {
         font-size: 1.2rem;
         height: 55vh;
         width: 90%;

@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './quoteText.css';
+import styles from './QuoteText.css';
 import Button from '../UI/Button/Button';
 
 const quoteText = (props) => {
     return (
-        <div id="text" className={styles.quoteText}>
+        <div id="text" className={styles.QuoteText}>
             <article className={styles.QuoteContainer}>
                 <h2>CATEGORY: {props.category}</h2>
                 <p className={styles.TextFadeIn}>"{props.quote}"</p>
