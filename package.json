@@ -1,7 +1,7 @@
 {
   "name": "random-quote-machine",
   "version": "0.1.0",
-  "homepage": "https://oyelowo.github.io/random-quote-machine",
+  "homepage": "https://oyelowo.github.io/random-quote-machine/",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
@@ -50,6 +50,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
+    "predeploy": "npm run build",
     "deploy" : "npm run build&&gh-pages -d build"
   },
   "jest": {
