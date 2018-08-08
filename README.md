@@ -7,5 +7,7 @@ This simple app was created using __reactJS__ and gets data from two APIs using 
  [pixabay](https://pixabay.com/api/?key=9392509-1ebd5d1cb57ec9a0bc4ec3aa0&q=nature&image_ty).
 
  The text colours are also randomly generated and errors are handled too.
+ 
+ ![My react random quote machine](https://oyelowo.github.io/randomQuoteMachine/src/assets/randomQuoteMachine.PNG)
 
  
